@@ -13,6 +13,34 @@ type User struct {
 	Email    string
 }
 
+func FindUserByUsername(username string) (user User, err error) {
+	query := "select id, username, email from users where username = ?"
+	row := db.Db.QueryRow(query, username)
+	user = User{
+		Id:       0,
+		Username: "",
+		Email:    "",
+	}
+	err = row.Scan(&user.Id, &user.Username, &user.Email)
+	if err != nil {
+		return
+	}
+	return
+}
+
+func InsertUser(user *User) (int64, error) {
+	query := "INSERT INTO users(username, pwd, email) values(?, ?, ?)"
+	result, err := db.Db.Exec(query, user.Username, user.Pwd, user.Email)
+	var lastInsertId int64
+	if err != nil {
+		return 0, err
+	}
+	if result != nil {
+		lastInsertId, _ = result.LastInsertId()
+	}
+	return lastInsertId, nil
+}
+
 // 添加用户
 func (user *User) AddUser() sql.Result {
 	query := "INSERT INTO users(username, pwd, email) values(?, ?, ?)"

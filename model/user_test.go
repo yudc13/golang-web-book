@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestUser_AddUser(t *testing.T)  {
+func TestUser_AddUser(t *testing.T) {
 	user := &User{
 		Username: "xiaohuang",
 		Pwd:      "123456",
@@ -36,10 +36,10 @@ func TestUser_AddUserByPrepare(t *testing.T) {
 
 func TestUser_QueryUserById(t *testing.T) {
 	user := &User{
-		Id: 7,
+		Id:       7,
 		Username: "",
-		Pwd: "",
-		Email: "",
+		Pwd:      "",
+		Email:    "",
 	}
 	user.QueryUserById()
 	t.Logf("user: %v \n", user)
@@ -53,7 +53,7 @@ func TestUser_QueryUserList(t *testing.T) {
 
 func TestUser_UpdateUserNameById(t *testing.T) {
 	user := User{
-		Id: 1,
+		Id:       1,
 		Username: "李佳佳",
 	}
 	result := user.UpdateUserNameById()
