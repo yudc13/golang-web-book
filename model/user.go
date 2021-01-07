@@ -7,21 +7,22 @@ import (
 )
 
 type User struct {
-	Id       int
-	Username string
-	Pwd      string
-	Email    string
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+	Pwd      string `json:"pwd"`
+	Email    string `json:"email"`
 }
 
 func FindUserByUsername(username string) (user User, err error) {
-	query := "select id, username, email from users where username = ?"
+	query := "select id, pwd, username, email from users where username = ?"
 	row := db.Db.QueryRow(query, username)
 	user = User{
 		Id:       0,
+		Pwd:      "",
 		Username: "",
 		Email:    "",
 	}
-	err = row.Scan(&user.Id, &user.Username, &user.Email)
+	err = row.Scan(&user.Id, &user.Pwd, &user.Username, &user.Email)
 	if err != nil {
 		return
 	}

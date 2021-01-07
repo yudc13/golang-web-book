@@ -9,9 +9,9 @@ import (
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-	if 	strings.TrimSpace(username) == "" || strings.TrimSpace(password) == "" {
+	username := r.PostFormValue("username")
+	password := r.PostFormValue("password")
+	if strings.TrimSpace(username) == "" || strings.TrimSpace(password) == "" {
 		response.Failure(nil, "用户名或密码不能为空", w)
 		return
 	}
@@ -23,7 +23,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	response.Success(user, w)
 }
 
-func Register(w http.ResponseWriter, r *http.Request)  {
+func Register(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 	rePassword := r.FormValue("rePassword")

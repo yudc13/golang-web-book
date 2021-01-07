@@ -13,7 +13,13 @@ func Login(username string, password string) (user model.User, err error) {
 	if u.Pwd != password {
 		return model.User{}, errors.New("用户名或密码错误")
 	}
-	return u, nil
+	// 不返回密码字段
+	user = model.User{
+		Id:       u.Id,
+		Username: u.Username,
+		Email:    u.Email,
+	}
+	return user, nil
 }
 
 func Register(user *model.User) (userId int64, err error) {

@@ -6,9 +6,9 @@ import (
 )
 
 type Response struct {
-	Code int
-	Data interface{}
-	Msg  string
+	Code int         `json:"code"`
+	Data interface{} `json:"data"`
+	Msg  string      `json:"msg"`
 }
 
 const (
@@ -17,10 +17,11 @@ const (
 )
 
 func SetJsonHeader(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "application-json")
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 }
 
-func Result(code int, data interface{}, msg string, w http.ResponseWriter)  {
+// 返回结果
+func Result(code int, data interface{}, msg string, w http.ResponseWriter) {
 	SetJsonHeader(w)
 	err := json.NewEncoder(w).Encode(Response{
 		Code: code,
@@ -32,7 +33,7 @@ func Result(code int, data interface{}, msg string, w http.ResponseWriter)  {
 	}
 }
 
-func Success(data interface{}, w http.ResponseWriter)  {
+func Success(data interface{}, w http.ResponseWriter) {
 	SetJsonHeader(w)
 	err := json.NewEncoder(w).Encode(Response{
 		Code: SUCCESS,
@@ -44,7 +45,7 @@ func Success(data interface{}, w http.ResponseWriter)  {
 	}
 }
 
-func Failure(data interface{}, msg string, w http.ResponseWriter)  {
+func Failure(data interface{}, msg string, w http.ResponseWriter) {
 	SetJsonHeader(w)
 	err := json.NewEncoder(w).Encode(Response{
 		Code: ERROR,
