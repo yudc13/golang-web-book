@@ -11,10 +11,10 @@ func GetBookList(bookName string, currentPage int64, pageSize int64) (bookPage m
 		return model.BookPage{}, err
 	}
 	var totalPage int64
-	if total % pageSize == 0 {
+	if total%pageSize == 0 {
 		totalPage = total / pageSize
 	} else {
-		totalPage = total / pageSize + 1
+		totalPage = total/pageSize + 1
 	}
 	bookPage = model.BookPage{
 		Books: books,

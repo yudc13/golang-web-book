@@ -14,3 +14,11 @@ create table books (
     stock int not null,
     cover varchar(100)
 )
+
+create table orders (
+    id int primary key not null auto_increment,
+    book_id int not null ,
+    price double(10, 2) not null ,
+    count int not null ,
+    foreign key (book_id) references books(id)
+)

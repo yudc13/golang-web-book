@@ -2,19 +2,16 @@ package controller
 
 import (
 	"encoding/gob"
-	"github.com/gorilla/sessions"
 	"golangWebBook/model"
 	"golangWebBook/model/response"
 	"golangWebBook/service"
+	"golangWebBook/utils"
 	"net/http"
-	"os"
 	"strings"
 )
 
-var store = sessions.NewCookieStore([]byte(os.Getenv("user")))
-
-func GetUserInfo(w http.ResponseWriter, r *http.Request)  {
-	session, err := store.Get(r, "user")
+func GetUserInfo(w http.ResponseWriter, r *http.Request) {
+	session, err := utils.SessionStore.Get(r, "user")
 	if err != nil {
 		response.Failure(nil, err.Error(), w)
 		return
@@ -36,11 +33,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// 保存用户信息到session中
-	session, _ := store.Get(r, "user")
+	session, _ := utils.SessionStore.Get(r, "user")
 	gob.Register(user)
 	session.Values["user"] = user
 	err = session.Save(r, w)
-	if err !=  nil {
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

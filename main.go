@@ -11,6 +11,7 @@ func main() {
 	http.HandleFunc("/register", controller.Register)
 	http.HandleFunc("/books", controller.GetBookList)
 	http.HandleFunc("/user", controller.GetUserInfo)
+	http.HandleFunc("/orders", controller.GetOrders)
 	err := http.ListenAndServe(":3000", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe error: ", err)

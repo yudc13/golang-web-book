@@ -9,6 +9,10 @@ import (
 )
 
 func GetBookList(w http.ResponseWriter, r *http.Request) {
+	//err := r.ParseForm()
+	//var formData map[string]interface{}
+	//json.NewDecoder(r.Body).Decode(&formData)
+	//fmt.Printf("body: %+v \n", formData)
 	bookName := r.PostFormValue("bookName")
 	currentPage := r.PostFormValue("currentPage")
 	pageSize := r.PostFormValue("pageSize")
